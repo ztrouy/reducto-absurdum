@@ -131,7 +131,67 @@ void ViewAllProducts() {
 }
 
 void AddProductMenu() {
-    throw new NotImplementedException();
+    Product newProduct = new Product();
+    newProduct.IsAvailable = true;
+
+    Console.WriteLine("What is the name of the product that you would like to add?");
+    while (string.IsNullOrWhiteSpace(newProduct.Name)) {
+        Console.WriteLine("Product name:");
+
+        try {
+            newProduct.Name = Console.ReadLine()!.Trim();
+        }
+        catch (FormatException) {
+            Console.WriteLine("Please input a string!");
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex);
+            Console.WriteLine("Something went wrong, please try again!");
+        }
+    }
+    
+    Console.WriteLine("What is its price?");
+    while (newProduct.Price == 0.0M) {
+        Console.WriteLine("Product price:");
+
+        try {
+            newProduct.Price = decimal.Parse(Console.ReadLine()!.Trim());
+        }
+        catch (FormatException) {
+            Console.WriteLine("Please input a decimal!");
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex);
+            Console.WriteLine("Something went wrong, please try again!");
+        }
+    }
+    
+    Console.WriteLine("What type of product is it?");
+
+    foreach (ProductType productType in productTypes) {
+        Console.WriteLine($"{productType.Id}. {productType.Name}");
+    }
+
+    while (newProduct.ProductTypeId == 0) {
+        Console.WriteLine("Product type:");
+
+        try {
+            int productTypeId = int.Parse(Console.ReadLine()!.Trim());
+            newProduct.ProductTypeId = productTypes[productTypeId - 1].Id;
+        }
+        catch (ArgumentOutOfRangeException) {
+            Console.WriteLine("Please input a valid integer!");
+        }
+        catch (FormatException) {
+            Console.WriteLine("Please input an integer!");
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex);
+            Console.WriteLine("Something went wrong, please try again!");
+        }
+    }
+
+    products.Add(newProduct);
 }
 
 void DeleteProductMenu() {
