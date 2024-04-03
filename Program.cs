@@ -98,14 +98,14 @@ void MainMenu() {
                 ViewAllProducts();
                 break;
             case "2":
-                throw new NotImplementedException();
-                // break;
+                AddProductMenu();
+                break;
             case "3":
-                throw new NotImplementedException();
-                // break;
+                DeleteProductMenu();
+                break;
             case "4":
-                throw new NotImplementedException();
-                // break;
+                UpdateProductMenu();
+                break;
             default:
                 Console.WriteLine("Invalid choice selected, please try again!\n");
                 break;
@@ -128,5 +128,17 @@ void ViewAllProducts() {
     }
 
     Console.WriteLine("");
+}
+
+void AddProductMenu() {
+    throw new NotImplementedException();
+}
+
+void DeleteProductMenu() {
+    throw new NotImplementedException();
+}
+
+void UpdateProductMenu() {
+    throw new NotImplementedException();
 }
 
