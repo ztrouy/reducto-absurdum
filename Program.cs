@@ -95,8 +95,8 @@ void MainMenu() {
                 Console.WriteLine("Goodbye!");
                 break;
             case "1":
-                throw new NotImplementedException();
-                // break;
+                ViewAllProducts();
+                break;
             case "2":
                 throw new NotImplementedException();
                 // break;
@@ -111,5 +111,22 @@ void MainMenu() {
                 break;
         }
     }
+}
+
+
+
+string ProductDetails(Product product) {
+    string productDetailsString = $"{product.Name}, part of the {productTypes[product.ProductTypeId - 1].Name} line that is {(product.IsAvailable ? $"available for ${product.Price}" : "currently unavailable")}";
+    return productDetailsString;
+}
+
+void ViewAllProducts() {
+    Console.WriteLine("Here are all of our products!");
+    
+    for (int i = 0; i < products.Count; i++) {
+        Console.WriteLine($"{i + 1}. {ProductDetails(products[i])}");
+    }
+
+    Console.WriteLine("");
 }
 
