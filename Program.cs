@@ -215,7 +215,34 @@ void AddProductMenu() {
 }
 
 void DeleteProductMenu() {
-    throw new NotImplementedException();
+    ViewAllProducts();
+
+    int chosenProduct = 0;
+    Console.WriteLine("Which product would you like to delete?");
+    while (chosenProduct == 0) {
+        Console.WriteLine("Chose product:");
+
+        try {
+            chosenProduct = int.Parse(Console.ReadLine()!.Trim());
+            Console.WriteLine($"\nDeleting {products[chosenProduct - 1].Name}...");
+            products.RemoveAt(chosenProduct - 1);
+            
+            Console.WriteLine("\nPress any key to continue");
+            Console.ReadKey();
+            Console.Clear();
+        }
+        catch (ArgumentOutOfRangeException) {
+            Console.WriteLine("Please choose a valid integer!");
+        }
+        catch (FormatException) {
+            Console.WriteLine("Please input an integer!");
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex);
+            Console.WriteLine("Something went wrong, please try again!");
+        }
+    }
+
 }
 
 void UpdateProductMenu() {
