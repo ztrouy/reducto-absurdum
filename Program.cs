@@ -22,49 +22,57 @@ List<Product> products = new List<Product>() {
         Name = "Cloak",
         Price = 79.99M,
         IsAvailable = true,
-        ProductTypeId = 1
+        ProductTypeId = 1,
+        DateStocked = new DateTime(2024, 02, 17)
     },
     new Product() {
         Name = "Hat",
         Price = 37.50M,
         IsAvailable = true,
-        ProductTypeId = 1
+        ProductTypeId = 1,
+        DateStocked = new DateTime(2023, 09, 28)
     },
     new Product() {
         Name = "Invisibility Potion",
         Price = 179.95M,
         IsAvailable = true,
-        ProductTypeId = 2
+        ProductTypeId = 2,
+        DateStocked = new DateTime(2024, 04, 02)
     },
     new Product() {
         Name = "Luck Potion",
         Price = 340.00M,
         IsAvailable = true,
-        ProductTypeId = 2
+        ProductTypeId = 2,
+        DateStocked = new DateTime(2024, 03, 18)
     },
     new Product() {
         Name = "Blanket of Endless Warmth",
         Price = 219.99M,
         IsAvailable = true,
-        ProductTypeId = 3
+        ProductTypeId = 3,
+        DateStocked = new DateTime(2022, 11, 29)
     },
     new Product() {
         Name = "Self Cleaning Bowl",
         Price = 68.99M,
         IsAvailable = true,
-        ProductTypeId = 3
+        ProductTypeId = 3,
+        DateStocked = new DateTime(2024, 01, 05)
     },
     new Product() {
         Name = "Spruce Wand",
         Price = 439.99M,
         IsAvailable = true,
-        ProductTypeId = 4
+        ProductTypeId = 4,
+        DateStocked = new DateTime(2024, 02, 19)
     },
     new Product() {
         Name = "Oak Wand",
         Price = 475.00M,
         IsAvailable = true,
-        ProductTypeId = 4
+        ProductTypeId = 4,
+        DateStocked = new DateTime(2024, 02, 19)
     }
 };
 
@@ -116,7 +124,7 @@ void MainMenu() {
 
 
 string ProductDetails(Product product) {
-    string productDetailsString = $"{product.Name}, part of the {productTypes[product.ProductTypeId - 1].Name} line that is {(product.IsAvailable ? $"available for ${product.Price}" : "currently unavailable")}";
+    string productDetailsString = $"{product.Name}, part of the {productTypes[product.ProductTypeId - 1].Name} line that {(product.IsAvailable ? $"has been available at ${product.Price} for {product.DaysOnShelf} days" : "is currently unavailable")}";
     return productDetailsString;
 }
 
@@ -209,6 +217,7 @@ void ViewAllProducts() {
 void AddProductMenu() {
     Product newProduct = new Product();
     newProduct.IsAvailable = true;
+    newProduct.DateStocked = DateTime.Now;
 
     SetProductName(newProduct);
     
