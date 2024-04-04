@@ -190,8 +190,10 @@ void SetProductType(Product product) {
 }
 
 void SetProductAvailability(Product product) {
-    throw new NotImplementedException();
+    Console.WriteLine($"Swapping from {(product.IsAvailable ? "available to not" : "not available to available")}");
+    product.IsAvailable = !product.IsAvailable;
 }
+
 
 
 void ViewAllProducts() {
