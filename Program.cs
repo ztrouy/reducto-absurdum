@@ -120,16 +120,6 @@ string ProductDetails(Product product) {
     return productDetailsString;
 }
 
-void ViewAllProducts() {
-    Console.WriteLine("Here are all of our products!");
-    
-    for (int i = 0; i < products.Count; i++) {
-        Console.WriteLine($"{i + 1}. {ProductDetails(products[i])}");
-    }
-
-    Console.WriteLine("");
-}
-
 void SetProductName(Product product) {
     string currentName = product.Name;
     
@@ -197,6 +187,18 @@ void SetProductType(Product product) {
             Console.WriteLine("Something went wrong, please try again!");
         }
     }
+}
+
+
+
+void ViewAllProducts() {
+    Console.WriteLine("Here are all of our products!");
+    
+    for (int i = 0; i < products.Count; i++) {
+        Console.WriteLine($"{i + 1}. {ProductDetails(products[i])}");
+    }
+
+    Console.WriteLine("");
 }
 
 void AddProductMenu() {
