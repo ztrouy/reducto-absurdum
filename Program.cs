@@ -217,6 +217,7 @@ void ViewAllProducts() {
 void AddProductMenu() {
     Product newProduct = new Product();
     newProduct.IsAvailable = true;
+    newProduct.DateStocked = DateTime.Now;
 
     SetProductName(newProduct);
     
