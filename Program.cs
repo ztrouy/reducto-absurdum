@@ -189,6 +189,9 @@ void SetProductType(Product product) {
     }
 }
 
+void SetProductAvailability(Product product) {
+    throw new NotImplementedException();
+}
 
 
 void ViewAllProducts() {
@@ -220,7 +223,7 @@ void DeleteProductMenu() {
     int chosenProduct = 0;
     Console.WriteLine("Which product would you like to delete?");
     while (chosenProduct == 0) {
-        Console.WriteLine("Chose product:");
+        Console.WriteLine("Choose product:");
 
         try {
             chosenProduct = int.Parse(Console.ReadLine()!.Trim());
@@ -246,6 +249,64 @@ void DeleteProductMenu() {
 }
 
 void UpdateProductMenu() {
-    throw new NotImplementedException();
+    ViewAllProducts();
+
+    Product chosenProduct = null;
+    Console.WriteLine("Which product would you like to update?");
+    while (chosenProduct == null) {
+        Console.WriteLine("Choose product:");
+
+        try {
+            int response = int.Parse(Console.ReadLine()!.Trim());
+            Console.Clear();
+            Console.WriteLine($"You have chosen to edit {products[response - 1].Name}");
+            chosenProduct = products[response - 1];
+        }
+        catch (ArgumentOutOfRangeException) {
+            Console.WriteLine("Please choose a valid integer!");
+        }
+        catch (FormatException) {
+            Console.WriteLine("Please input an integer!");
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex);
+            Console.WriteLine("Something went wrong, please try again!");
+        }
+    }
+
+    string userChoice = null;
+    while (userChoice != "0") {
+        Console.WriteLine(@$"
+    0. Finish editing {chosenProduct.Name}
+    1. Edit Name
+    2. Edit Price
+    3. Edit Product Type
+    4. Edit Availability
+        ");
+
+        userChoice = Console.ReadLine()!.Trim();
+        Console.Clear();
+
+        switch (userChoice) {
+            case "0":
+                Console.WriteLine("Done editing!");
+                break;
+            case "1":
+                SetProductName(chosenProduct);
+                break;
+            case "2":
+                SetProductPrice(chosenProduct);
+                break;
+            case "3":
+                SetProductType(chosenProduct);
+                break;
+            case "4":
+                SetProductAvailability(chosenProduct);
+                break;
+            default:
+                Console.WriteLine("Invalid choice selected, please try again!\n");
+                break;
+        }
+    }
 }
 
