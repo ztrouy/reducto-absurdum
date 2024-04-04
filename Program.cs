@@ -98,14 +98,14 @@ void MainMenu() {
                 ViewAllProducts();
                 break;
             case "2":
-                throw new NotImplementedException();
-                // break;
+                AddProductMenu();
+                break;
             case "3":
-                throw new NotImplementedException();
-                // break;
+                DeleteProductMenu();
+                break;
             case "4":
-                throw new NotImplementedException();
-                // break;
+                UpdateProductMenu();
+                break;
             default:
                 Console.WriteLine("Invalid choice selected, please try again!\n");
                 break;
@@ -120,6 +120,77 @@ string ProductDetails(Product product) {
     return productDetailsString;
 }
 
+void SetProductName(Product product) {
+    string currentName = product.Name;
+    
+    Console.WriteLine("What should the name of this product be?");
+    while (product.Name == currentName) {
+        Console.WriteLine("Product name:");
+
+        try {
+            product.Name = Console.ReadLine()!.Trim();
+        }
+        catch (FormatException) {
+            Console.WriteLine("Please input a string!");
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex);
+            Console.WriteLine("Something went wrong, please try again!");
+        }
+    }
+}
+
+void SetProductPrice(Product product) {
+    decimal currentPrice = product.Price;
+    
+    Console.WriteLine("What is its price?");
+    while (product.Price == currentPrice | product.Price == 0.0M) {
+        Console.WriteLine("Product price:");
+
+        try {
+            product.Price = decimal.Parse(Console.ReadLine()!.Trim());
+        }
+        catch (FormatException) {
+            Console.WriteLine("Please input a decimal!");
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex);
+            Console.WriteLine("Something went wrong, please try again!");
+        }
+    }
+}
+
+void SetProductType(Product product) {
+    int currentProductTypeId = product.ProductTypeId;
+    
+    Console.WriteLine("What type of product should it be?");
+
+    foreach (ProductType productType in productTypes) {
+        Console.WriteLine($"{productType.Id}. {productType.Name}");
+    }
+
+    while (product.ProductTypeId == 0 | product.ProductTypeId == currentProductTypeId) {
+        Console.WriteLine("Product type:");
+
+        try {
+            int productTypeId = int.Parse(Console.ReadLine()!.Trim());
+            product.ProductTypeId = productTypes[productTypeId - 1].Id;
+        }
+        catch (ArgumentOutOfRangeException) {
+            Console.WriteLine("Please input a valid integer!");
+        }
+        catch (FormatException) {
+            Console.WriteLine("Please input an integer!");
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex);
+            Console.WriteLine("Something went wrong, please try again!");
+        }
+    }
+}
+
+
+
 void ViewAllProducts() {
     Console.WriteLine("Here are all of our products!");
     
@@ -128,5 +199,26 @@ void ViewAllProducts() {
     }
 
     Console.WriteLine("");
+}
+
+void AddProductMenu() {
+    Product newProduct = new Product();
+    newProduct.IsAvailable = true;
+
+    SetProductName(newProduct);
+    
+    SetProductPrice(newProduct);
+    
+    SetProductType(newProduct);
+
+    products.Add(newProduct);
+}
+
+void DeleteProductMenu() {
+    throw new NotImplementedException();
+}
+
+void UpdateProductMenu() {
+    throw new NotImplementedException();
 }
 
