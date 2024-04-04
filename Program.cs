@@ -28,7 +28,7 @@ List<Product> products = new List<Product>() {
     new Product() {
         Name = "Hat",
         Price = 37.50M,
-        IsAvailable = true,
+        IsAvailable = false,
         ProductTypeId = 1,
         DateStocked = new DateTime(2023, 09, 28)
     },
@@ -90,9 +90,10 @@ void MainMenu() {
         Console.WriteLine(@"
         0. Leave
         1. View All Products
-        2. Add a Product
-        3. Remove a Product
-        4. Update a Product
+        2. View Available Products
+        3. Add a Product
+        4. Remove a Product
+        5. Update a Product
         ");
 
         userChoice = Console.ReadLine()!.Trim();
@@ -106,12 +107,15 @@ void MainMenu() {
                 ViewAllProducts();
                 break;
             case "2":
-                AddProductMenu();
+                ViewAvailableProducts();
                 break;
             case "3":
-                DeleteProductMenu();
+                AddProductMenu();
                 break;
             case "4":
+                DeleteProductMenu();
+                break;
+            case "5":
                 UpdateProductMenu();
                 break;
             default:
@@ -212,6 +216,22 @@ void ViewAllProducts() {
     }
 
     Console.WriteLine("");
+}
+
+void ViewAvailableProducts() {
+    List<Product> availableProducts = products.Where(product => product.IsAvailable).ToList();
+    int count = 1;
+
+    List<string> productStrings = availableProducts.Select(product => {
+        string productString = $"{count}. {ProductDetails(product)}";
+        count++;
+
+        return productString;
+    }).ToList();
+
+    foreach (string productString in productStrings) {
+        Console.WriteLine(productString);
+    }
 }
 
 void AddProductMenu() {
